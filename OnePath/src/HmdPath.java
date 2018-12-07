@@ -2,19 +2,19 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 /**
- * vxĞ¡ÓÎÏ·£ºÒ»±Ê»­Íê Ñ°Â·
+ * vxå°æ¸¸æˆï¼šä¸€ç¬”ç”»å®Œ å¯»è·¯
  * @author yinzw
  *
  */
 public class HmdPath {
 
-	private int m,n;//mĞĞnÁĞ
-	private int[][] edge;//ÁÚ½Ó¾ØÕó
-	private int e = 0;//±ßÊı
-	private Stack<Integer> path = new Stack<>();//¼ÇÂ¼µ±Ç°Â·¾¶
-	private Stack<Set<Integer>> visited = new Stack<>();//¼ÇÂ¼µ±Ç°Â·¾¶ÖĞÃ¿¸ö½ÚµãÒÑ¾­·ÃÎÊ¹ıµÄ½Úµã
-	private int[] dels;//É¾³ıµÄµã
-	private int nodes;//Í¼µÄ¶¥µãÊı
+	private int m,n;//mè¡Œnåˆ—
+	private int[][] edge;//é‚»æ¥çŸ©é˜µ
+	private int e = 0;//è¾¹æ•°
+	private Stack<Integer> path = new Stack<>();//è®°å½•å½“å‰è·¯å¾„
+	private Stack<Set<Integer>> visited = new Stack<>();//è®°å½•å½“å‰è·¯å¾„ä¸­æ¯ä¸ªèŠ‚ç‚¹å·²ç»è®¿é—®è¿‡çš„èŠ‚ç‚¹
+	private int[] dels;//åˆ é™¤çš„ç‚¹
+	private int nodes;//å›¾çš„é¡¶ç‚¹æ•°
 	
 	
 	public HmdPath(int m, int n, int ... dels) {
@@ -25,39 +25,39 @@ public class HmdPath {
 		this.dels = dels;
 		this.initEdges(dels);
 	}
-	//¿ªÊ¼Ñ°Â·
+	//å¼€å§‹å¯»è·¯
 	private boolean findPath() {
 		if(path.isEmpty()) {
-			System.out.println("ÇëÊ¹ÓÃsetStart(int)·½·¨ÉèÖÃÆğÊ¼µã");
+			System.out.println("è¯·ä½¿ç”¨setStart(int)æ–¹æ³•è®¾ç½®èµ·å§‹ç‚¹");
 			return false;
 		}else
 			return findPath(path.peek());
 	}
-	//Ñ°Â·£¬xÒÑ¾­ÔÚpathÖĞ
+	//å¯»è·¯ï¼Œxå·²ç»åœ¨pathä¸­
 	private boolean findPath(int x) {
-		//ËÀÂ·ÅĞ¶Ï
+		//æ­»è·¯åˆ¤æ–­
 		if(isToDeath(x)) {
 			backTrack(x);
-			//System.out.println("»ØËİ");
+			//System.out.println("å›æº¯");
 			return findPath(path.peek());
 		}
 		
-		//ÓÅÏÈÑ¡Ôñ¶ÈÎª1µÄ½Úµã£¬´æÔÚ¶ÈÎª1µÄ½áµãÒªÃ´ÒÑ¾­³É¹¦£¬ÒªÃ´ÕâÊÇÒ»ÌõËÀÂ·
+		//ä¼˜å…ˆé€‰æ‹©åº¦ä¸º1çš„èŠ‚ç‚¹ï¼Œå­˜åœ¨åº¦ä¸º1çš„ç»“ç‚¹è¦ä¹ˆå·²ç»æˆåŠŸï¼Œè¦ä¹ˆè¿™æ˜¯ä¸€æ¡æ­»è·¯
 		for(int j = 0; j < m * n; j++) {
 			if(j != x && !visited.peek().contains(j) && edge[x][j] == 1 && getDegree(j) == 1) {
 				if(path.size() == nodes - 1) {
-					//½«¸Ã½Úµã¼ÓÈëÂ·¾¶ÖĞ
+					//å°†è¯¥èŠ‚ç‚¹åŠ å…¥è·¯å¾„ä¸­
 					path.push(j);
-					//É¾³ıÇ°Ò»¸ö½ÚµãËùÓĞ±ß
+					//åˆ é™¤å‰ä¸€ä¸ªèŠ‚ç‚¹æ‰€æœ‰è¾¹
 					delEdge(x);
-					//¸üĞÂÉÏÒ»¸ö½ÚµãµÄ·ÃÎÊ¼ÇÂ¼
+					//æ›´æ–°ä¸Šä¸€ä¸ªèŠ‚ç‚¹çš„è®¿é—®è®°å½•
 					visited.peek().add(j);
-					//³õÊ¼»¯j½ÚµãµÄ·ÃÎÊ¼ÇÂ¼
+					//åˆå§‹åŒ–jèŠ‚ç‚¹çš„è®¿é—®è®°å½•
 					Set<Integer> vis = new HashSet<>();
 					visited.push(vis);
-					return true;//³É¹¦£¡
-				}else {//ÕâÊÇÒ»ÌõËÀÂ·
-					//»ØËİ
+					return true;//æˆåŠŸï¼
+				}else {//è¿™æ˜¯ä¸€æ¡æ­»è·¯
+					//å›æº¯
 					backTrack(x);
 					return findPath(path.peek());//
 				}
@@ -65,16 +65,16 @@ public class HmdPath {
 			
 		}
 		
-		//Æä´ÎÑ¡Ôñ¶ÈÎª2µÄ½Úµã
+		//å…¶æ¬¡é€‰æ‹©åº¦ä¸º2çš„èŠ‚ç‚¹
 		for(int j = 0; j < m * n; j++) {
 			if(j != x && !visited.peek().contains(j) && edge[x][j] == 1 && getDegree(j) == 2) {
-				//½«¸Ã½Úµã¼ÓÈëÂ·¾¶ÖĞ
+				//å°†è¯¥èŠ‚ç‚¹åŠ å…¥è·¯å¾„ä¸­
 				path.push(j);
-				//É¾³ıÇ°Ò»¸ö½ÚµãËùÓĞ±ß
+				//åˆ é™¤å‰ä¸€ä¸ªèŠ‚ç‚¹æ‰€æœ‰è¾¹
 				delEdge(x);
-				//¸üĞÂÉÏÒ»¸ö½ÚµãµÄ·ÃÎÊ¼ÇÂ¼
+				//æ›´æ–°ä¸Šä¸€ä¸ªèŠ‚ç‚¹çš„è®¿é—®è®°å½•
 				visited.peek().add(j);
-				//³õÊ¼»¯j½ÚµãµÄ·ÃÎÊ¼ÇÂ¼
+				//åˆå§‹åŒ–jèŠ‚ç‚¹çš„è®¿é—®è®°å½•
 				Set<Integer> vis = new HashSet<>();
 				visited.push(vis);
 				return findPath(j);
@@ -82,53 +82,53 @@ public class HmdPath {
 			
 		}
 
-		//ÈÎÒâÕÒÒ»¸öÃ»ÓĞ·ÃÎÊ¹ıµÄ½Úµã
+		//ä»»æ„æ‰¾ä¸€ä¸ªæ²¡æœ‰è®¿é—®è¿‡çš„èŠ‚ç‚¹
 		for(int i = 0; i < m*n; i++) {
 			if(i != x && !visited.peek().contains(i) && edge[x][i] == 1) {
-				//½«¸Ã½Úµã¼ÓÈëÂ·¾¶ÖĞ
+				//å°†è¯¥èŠ‚ç‚¹åŠ å…¥è·¯å¾„ä¸­
 				path.push(i);
-				//É¾³ıx½áµãËùÓĞ±ß
+				//åˆ é™¤xç»“ç‚¹æ‰€æœ‰è¾¹
 				delEdge(x);
-				//¸üĞÂx½áµãµÄ·ÃÎÊ¼ÇÂ¼
+				//æ›´æ–°xç»“ç‚¹çš„è®¿é—®è®°å½•
 				visited.peek().add(i);
-				//³õÊ¼»¯i½áµãµÄ·ÃÎÊ¼ÇÂ¼
+				//åˆå§‹åŒ–iç»“ç‚¹çš„è®¿é—®è®°å½•
 				Set<Integer> vis = new HashSet<>();
 				visited.push(vis);
 				return findPath(i);
 			}
 		}
 		
-		//Ã»ÓĞÂ·
+		//æ²¡æœ‰è·¯
 		if(path.size() == nodes) {
 			return true;
 		}
 		else if(path.size() < nodes) {
 			backTrack(x);
-			//System.out.println("»ØËİ");
+			//System.out.println("å›æº¯");
 			return findPath(path.peek());
 		}else {
-			System.out.println("ºÜÆæ¹Ö£¬Ã»ÓĞÂ·ÁË");
+			System.out.println("å¾ˆå¥‡æ€ªï¼Œæ²¡æœ‰è·¯äº†");
 			return false;
 		}
 			
 		
 	}
-	//»ØËİµ½ÉÏÒ»¸ö½áµã
+	//å›æº¯åˆ°ä¸Šä¸€ä¸ªç»“ç‚¹
 	private boolean backTrack(int x) {
-		path.pop();//x³öÕ»
-		visited.pop();//É¾³ı¶ÔÓ¦µÄ·ÃÎÊ¼ÇÂ¼
+		path.pop();//xå‡ºæ ˆ
+		visited.pop();//åˆ é™¤å¯¹åº”çš„è®¿é—®è®°å½•
 		if(path.size() == 0) {
-			System.out.println("ÒÑ»ØËİµ½¸ù½áµã£¡");
+			System.out.println("å·²å›æº¯åˆ°æ ¹ç»“ç‚¹ï¼");
 			return false;
 		}
-		initEdges(dels);//ÖØĞÂ³õÊ¼»¯Í¼
-		//pathÕ»ÖĞ³ıÕ»¶¥½Úµã£¬É¾³ıÆäËûËùÓĞ½áµãÁ¬½ÓµÄ±ß£¬Íê³ÉÍ¼µÄ»ØËİ
+		initEdges(dels);//é‡æ–°åˆå§‹åŒ–å›¾
+		//pathæ ˆä¸­é™¤æ ˆé¡¶èŠ‚ç‚¹ï¼Œåˆ é™¤å…¶ä»–æ‰€æœ‰ç»“ç‚¹è¿æ¥çš„è¾¹ï¼Œå®Œæˆå›¾çš„å›æº¯
 		for(int i = 0; i < path.size() - 1; i++) {
 			delEdge(path.get(i));
 		}
 		return true;
 	}
-	//»ñÈ¡½ÚµãµÄ¶È
+	//è·å–èŠ‚ç‚¹çš„åº¦
 	private int getDegree(int x) {
 		int degree = 0;
 
@@ -160,14 +160,14 @@ public class HmdPath {
 		}
 	}
 	
-	//ÉèÖÃÆğÊ¼µã
+	//è®¾ç½®èµ·å§‹ç‚¹
 	private void setStart(int s) {
 		path.push(s);
 		Set<Integer> vis = new HashSet<Integer>();
 		visited.push(vis);
 		//findPath(s);
 	}
-	//³õÊ¼»¯ÁÚ½Ó¾ØÕó
+	//åˆå§‹åŒ–é‚»æ¥çŸ©é˜µ
 	private void initEdges(int ... args) {
 		dels = args;
 		initEdges();
@@ -178,7 +178,7 @@ public class HmdPath {
 		}
 		nodes = nodes - args.length;
 	}
-	//É¾³ı½áµãxÏàÁ¬µÄËùÓĞ±ß
+	//åˆ é™¤ç»“ç‚¹xç›¸è¿çš„æ‰€æœ‰è¾¹
 	private void delEdge(int x) {
 		for(int j = 0; j< m * n; j++) {
 			if(edge[x][j] == 1) {
@@ -189,7 +189,7 @@ public class HmdPath {
 		}
 	}
 	
-	//ÅĞ¶Ï´Ó¸Ã½áµã³ö·¢ÊÇ·ñÎªËÀÂ·£¨¿ÉÀ©Õ¹£©
+	//åˆ¤æ–­ä»è¯¥ç»“ç‚¹å‡ºå‘æ˜¯å¦ä¸ºæ­»è·¯ï¼ˆå¯æ‰©å±•ï¼‰
 	private boolean isToDeath(int x) {
 		int deg2 = 0;
 		for(int j = 0; j < m * n; j++) {
@@ -208,7 +208,7 @@ public class HmdPath {
 		
 		
 	}
-	//´òÓ¡Í¼µÄÁÚ½Ó¾ØÕó
+	//æ‰“å°å›¾çš„é‚»æ¥çŸ©é˜µ
 	private void printEdges() {
 		for(int i = 0; i < m*n; i++) {
 			for(int j = 0; j< m * n; j++) {
@@ -218,13 +218,13 @@ public class HmdPath {
 		}
 		
 		System.out.println();
-		System.out.println("µ±Ç°±ßÊıÎª£º" + e);
+		System.out.println("å½“å‰è¾¹æ•°ä¸ºï¼š" + e);
 		
 	}
  	
 	private void printPath() {
 		System.out.println();
-		System.out.println("±àºÅÈçÏÂ£º");
+		System.out.println("ç¼–å·å¦‚ä¸‹ï¼š");
 		for(int i = 0; i < m; i++) {
 			for(int j = 0; j < n; j++) {
 				int num = i * n + j;
@@ -238,7 +238,7 @@ public class HmdPath {
 		}
 		System.out.println();
 		
-		System.out.println("Ò»±Ê»­£º");
+		System.out.println("ä¸€ç¬”ç”»ï¼š");
 		for(int i = 0; i < m; i++) {
 			for(int j = 0; j < n; j++) {
 				int num = i * n + j;
@@ -265,8 +265,8 @@ public class HmdPath {
 	
 	public static void main(String[] args) {
 		
-		HmdPath ybhw = new HmdPath(8,6,7,13,29,31,34);	
-		ybhw.setStart(4);
+		HmdPath ybhw = new HmdPath(8,6,2,7,10,26,29);	
+		ybhw.setStart(37);
 		ybhw.findPath();
 		System.out.println("path:length=" + ybhw.path.size());
 		ybhw.path.stream().forEach((x) -> System.out.print(x + "->") );
