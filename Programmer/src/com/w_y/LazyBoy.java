@@ -64,7 +64,7 @@ public class LazyBoy {
 		LazyBoy.tarDir = tarDir;
 	}
 
-	//Éú³ÉÎÄ¼ş
+	//ç”Ÿæˆæ–‡ä»¶
 	public static void generate() {
 		for(String layer :layerNames) {
 			StringBuilder path = new StringBuilder();
@@ -89,7 +89,7 @@ public class LazyBoy {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("Éú³É³É¹¦£¡");
+				System.out.println("ç”ŸæˆæˆåŠŸï¼");
 			}
 			
 			//write sth
@@ -103,7 +103,7 @@ public class LazyBoy {
 				//time
 				Calendar calendar= Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				//Àà×¢ÊÍ
+				//ç±»æ³¨é‡Š
 				StringBuilder classComment = new StringBuilder();
 				classComment.append("/**\r\n" + 
 						" * \r\n" + 
@@ -114,8 +114,8 @@ public class LazyBoy {
 						" * @version 1.0.0\r\n" + 
 						" *<p>\r\n" + 
 						" *--------------------------------------------------------------<br>\r\n" + 
-						" * ĞŞ¸ÄÂÄÀú£º<br>\r\n" + 
-						" *        <li> " + sdf.format(calendar.getTime()) + "£¬" + author + "£¬´´½¨ÎÄ¼ş£»<br>\r\n" + 
+						" * ä¿®æ”¹å±¥å†ï¼š<br>\r\n" + 
+						" *        <li> " + sdf.format(calendar.getTime()) + "ï¼Œ" + author + "ï¼Œåˆ›å»ºæ–‡ä»¶ï¼›<br>\r\n" + 
 						" *--------------------------------------------------------------<br>\r\n" + 
 						" *</p>\r\n" + 
 						" */\r\n");
