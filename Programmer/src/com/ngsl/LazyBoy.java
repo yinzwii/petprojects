@@ -1,4 +1,4 @@
-package com.w_y;
+package com.ngsl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,11 +16,11 @@ import java.util.Calendar;
 import java.util.List;
 
 public class LazyBoy {
-	private static String parentDir = "com/neuqsoft";
-	private static String moduleName = "gg";
+	private static String parentDir = "com/neuqsoft/zx/reward";
+	private static String moduleName = "lhjc";
 	private static List<String> layerNames;
 	private static String author = "yinzw@neuqsoft.com";
-	private static String apiUrl = "V0";
+	private static String apiUrl = "V0/lhjc";
 	private static String tarDir = "C:/Users/Administrator/Desktop";
 
 	public static String getParentDir() {
